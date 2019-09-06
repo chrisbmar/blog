@@ -19,7 +19,8 @@ let allPosts = [];
 app.get("/", (req, res) => {
   res.render("home", {
     homeContent: homeContent,
-    posts: allPosts});
+    posts: allPosts,
+  });
 });
 
 app.get("/about", (req, res) => {
@@ -36,12 +37,11 @@ app.get("/posts/:title", (req, res) => {
 
   allPosts.forEach(post => {
     const postTitle = _.lowerCase(post.title);
-    const content = post.content;
 
     if(postTitle === paramsTitle) {
       res.render("post", {
         postTitle: post.title,
-        content: content
+        content: post.content
       });
     } else {
       res.render("failure");
@@ -71,5 +71,5 @@ app.post("/compose", (req, res) => {
 
 
 app.listen(4000, function() {
-  console.log("Server started on port 3000");
+  console.log("Server started on port 4000");
 });
