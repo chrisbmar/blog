@@ -56,11 +56,16 @@ app.get("/posts/:postId", (req, res) => {
   const reqPostId = req.params.postId;
   
   Post.findOne({_id: reqPostId}, (err, post) => {
-    res.render("post", {
-      title: post.title,
-      content: post.content
-    });
+    if (!err) {
+      res.render("post", {
+        title: post.title,
+        content: post.content
+      });
+    } else {
+      res.render("failure");
+    } 
   });
+
 });
 
 app.get("/about", (req, res) => {
