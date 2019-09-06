@@ -60,5 +60,11 @@
   label {
       padding: 5px 0px;
   }
+
+  /* Failure page styles */
+
+  .jumbotron {
+    margin-top: 50px;
+  }
     
 

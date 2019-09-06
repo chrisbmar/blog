@@ -47,7 +47,6 @@ app.get("/posts/:title", (req, res) => {
       res.render("failure");
     }
   });
-
 });
 
 app.get("/compose", (req, res) => {
