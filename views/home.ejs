@@ -1,11 +1,24 @@
 <%- include('partials/header') %>
 
-<h1>Home</h1>
+<!-- <h1 class="page-title">Home</h1>
 <p><%= homeContent %></p>
+ -->
+
+
 <% posts.forEach(post => { %>
-    <h1><%= post.title %> </h1>
-    <p>
-    <%= post.content.substring(0, 100) + "..."%> <a href="posts/<%= post._id%>">Read More</a></p>
+    <div class="blog-post">
+        <div class="author-info">
+                <div class="image-container">
+                    <img src="/images/Screenshot 2019-09-06 at 14.11.37.png" alt="image of author" height="40" width="40">
+                </div>
+                <div class="postinfo-container">
+                    <span>Chris Martin</span>
+                    <p>September 6th 2019 | <span>5 min read</span></p>
+                </div>
+        </div>
+        <h1><%= post.title %> </h1>
+        <p><%= post.content.substring(0, 100) + "..."%> <a href="posts/<%= post._id%>">Read More</a></p>
+    </div>
 <% }); %>
 
 
