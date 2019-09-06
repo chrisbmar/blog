@@ -3,10 +3,16 @@
 <h1>Compose</h1>
 <form action="/compose" method="POST">
     <div class="form-group">
+        <label>Author</label>
+        <input type="text" class="form-control" name="postAuthor" placeholder="What's your name?">
+        <label>Date</label>
+        <input type="text" class="form-control" name="postDate" placeholder="format: September 6th 2019">
+        <label>Reading Time</label>
+        <input type="text" class="form-control" name="postReadingTime" placeholder="How many minutes reading time?">
         <label>Title</label>
-        <input type="text" class="form-control" name="postTitle">
+        <input type="text" class="form-control" name="postTitle" placeholder="Title of blog post">
         <label>Blog Post</label>
-        <textarea class="form-control" rows="10" name="postBody"></textarea>
+        <textarea class="form-control" rows="10" name="postBody" placeholder="Blog post content"></textarea>
     </div>
     <button type="submit" class="publish-button">PUBLISH</button>
 </form>
