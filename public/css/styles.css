@@ -20,10 +20,6 @@
   min-height: 100vh;
 }
 
-/* .footer-padding {
-	padding-bottom: 60px;
-} */
-
 .footer {
   display: flex;
   justify-content: center;
@@ -34,6 +30,7 @@
   background-color: #1abc9c;
   font-size: 14px;
   color: #fff;
+  margin-top: 20px;
 }
 
 a {
@@ -155,12 +152,46 @@ a:hover {
   }
 
   .contact-method:hover {
-    color: #1abc9c
+    color: #1abc9c;
   }
 
   .fa-globe-americas, .fa-github-square, .fa-linkedin, .fa-at {
     font-size: 35px;
     margin: 10px;
+  }
+
+  form {
+    width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px 0px 50px 0px;
+  }
+
+  .btn-primary {
+    background-color: #1abc9c;
+    border: none;
+  }
+
+  .btn-primary:hover {
+    background-color: #1abc9c;
+    opacity: 0.8;
+  }
+
+  .top {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  
+  .middle {
+    border-radius: 0;
+    margin-bottom: -1px;
+  }
+  
+  .bottom {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
   }
 
 
