@@ -65,7 +65,8 @@ a:hover {
   }
 
   label {
-      padding: 5px 0px;
+      padding: 10px 0px 3px 0px;
+      margin-bottom: 0px;
   }
 
   /* Failure page styles */
@@ -160,22 +161,12 @@ a:hover {
     margin: 10px;
   }
 
-  form {
+   #form-signin {
     width: 500px;
     margin: 0 auto;
     text-align: center;
     padding: 10px 0px 50px 0px;
-  }
-
-  .btn-primary {
-    background-color: #1abc9c;
-    border: none;
-  }
-
-  .btn-primary:hover {
-    background-color: #1abc9c;
-    opacity: 0.8;
-  }
+  } 
 
   .top {
     margin-bottom: -1px;
