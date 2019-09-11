@@ -84,6 +84,10 @@ app.get("/compose", (req, res) => {
   res.render("compose");
 });
 
+app.get("/success", (req, res) => {
+  res.render("success");
+});
+
 app.post("/compose", (req, res) => {
   const post = new Post({
     title: req.body.postTitle,
