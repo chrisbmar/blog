@@ -75,7 +75,6 @@ app.post("/", (req, res) => {
             res.render("success");
           } else {
             res.render("failure");
-            console.log("3");
           };
       };
   });
