@@ -97,6 +97,22 @@ a:hover {
 
   /* Home page styles */
 
+  #bars {
+    display: none;
+    color: #337ab7;
+  }
+
+  #bars:hover {
+    cursor: pointer;
+  }
+
+  .fa-bars {
+    font-size: 25px;
+    float: right;
+    height: 50px;
+    padding: 12px 15px;
+  }
+
   .author-read-more {
     color: #1abc9c;
     font-weight: bold;
@@ -191,6 +207,43 @@ a:hover {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+  }
+
+
+/* media queries */
+
+  @media only screen and (max-width: 767px) {
+
+    #form-signin {
+      width: 80%;
+    }
+
+    .contactinfo {
+      font-size: 15px;
+      width: 90%;
+      margin: 0 auto;
+      margin-top: 60px;
+    }
+
+    #nav-options {
+      display: none;
+    }
+
+    .footer {
+      text-align: center;
+    }
+  }
+
+  @media only screen and (max-width: 766px) {
+    #bars {
+      display: flex;
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
+    .jumbotron p {
+      font-size: 12px;
+    }
   }
 
 
