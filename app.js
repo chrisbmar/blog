@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require('mongoose');
 const request = require('request');
+const showdown = require('showdown');
+const converter = new showdown.Converter();
 
 const aboutContent = "Hac habitasse platea dictumst vestibulum rhoncus est pellentesque. Dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Non diam phasellus vestibulum lorem sed. Platea dictumst quisque sagittis purus sit. Egestas sed sed risus pretium quam vulputate dignissim suspendisse. Mauris in aliquam sem fringilla. Semper risus in hendrerit gravida rutrum quisque non tellus orci. Amet massa vitae tortor condimentum lacinia quis vel eros. Enim ut tellus elementum sagittis vitae. Mauris ultrices eros in cursus turpis massa tincidunt dui.";
 const listId = process.env.LIST_ID;
@@ -89,9 +91,14 @@ app.get("/success", (req, res) => {
 });
 
 app.post("/compose", (req, res) => {
+
+  const postInMarkdown = req.body.postBody;
+  const postToHtml = converter.makeHtml(postInMarkdown);
+  // console.log(postToHtml);
+
   const post = new Post({
     title: req.body.postTitle,
-    content: req.body.postBody,
+    content: postToHtml,
     author: req.body.postAuthor,
     date: req.body.postDate,
     time: req.body.postReadingTime
