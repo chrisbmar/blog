@@ -11,9 +11,11 @@ const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const findOrCreate = require('mongoose-findorcreate');
 
+//environment variables
 const listId = process.env.LIST_ID;
 const apiKey = process.env.API_KEY;
 const accessCode = process.env.ACCESS_CODE;
+const dbSecret = process.env.DB_SECRET;
 
 const app = express();
 
@@ -22,7 +24,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 app.use(session({
-  secret: process.env.DB_SECRET,
+  secret: dbSecret,
   resave: false,
   saveUninitialized: false
 }));
@@ -33,6 +35,7 @@ app.use(passport.session());
 mongoose.connect("mongodb://localhost:27017/blogDB", {useNewUrlParser: true});
 mongoose.set("useCreateIndex", true);
 
+//blog post schema
 const postSchema = {
   title: String,
   content: String,
@@ -43,6 +46,7 @@ const postSchema = {
 
 const Post = mongoose.model("Post", postSchema);
 
+//user schema for logging in an authenticated user
 const userSchema = new mongoose.Schema ({
   username: { type: String, require: true, index:true, unique:true, sparse:true },
   password: String,
@@ -167,10 +171,6 @@ app.get("/compose", (req, res) => {
   } else {
     res.redirect("/login");
   }
-});
-
-app.get("/success", (req, res) => {
-  res.render("success");
 });
 
 app.post("/compose", (req, res) => {
