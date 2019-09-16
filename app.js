@@ -13,6 +13,7 @@ const findOrCreate = require('mongoose-findorcreate');
 
 const listId = process.env.LIST_ID;
 const apiKey = process.env.API_KEY;
+const accessCode = process.env.ACCESS_CODE;
 
 const app = express();
 
@@ -115,6 +116,29 @@ app.post("/", (req, res) => {
       };
   });
 }); 
+
+app.get("/register", (req, res) => {
+  res.render("register");
+});
+
+app.post("/register", (req, res) => {
+
+  if (req.body.code !== accessCode) {
+    res.render("failure");
+  } else {
+    User.register({username: req.body.username}, req.body.password, (err, user) => {
+      if (err) {
+        console.log(err);
+        res.redirect("/register");
+      } else {
+        passport.authenticate("local")(req, res, () => {
+          res.redirect("/compose");
+        });
+      }
+    });
+  }
+
+});
 
 app.get("/login", (req, res) => {
   res.render("login");
