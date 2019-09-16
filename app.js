@@ -6,6 +6,10 @@ const mongoose = require('mongoose');
 const request = require('request');
 const showdown = require('showdown');
 const converter = new showdown.Converter();
+const session = require("express-session");
+const passport = require("passport");
+const passportLocalMongoose = require("passport-local-mongoose");
+const findOrCreate = require('mongoose-findorcreate');
 
 const listId = process.env.LIST_ID;
 const apiKey = process.env.API_KEY;
@@ -13,11 +17,20 @@ const apiKey = process.env.API_KEY;
 const app = express();
 
 app.set('view engine', 'ejs');
-
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
+app.use(session({
+  secret: process.env.DB_SECRET,
+  resave: false,
+  saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 mongoose.connect("mongodb://localhost:27017/blogDB", {useNewUrlParser: true});
+mongoose.set("useCreateIndex", true);
 
 const postSchema = {
   title: String,
@@ -28,6 +41,28 @@ const postSchema = {
 };
 
 const Post = mongoose.model("Post", postSchema);
+
+const userSchema = new mongoose.Schema ({
+  username: { type: String, require: true, index:true, unique:true, sparse:true },
+  password: String,
+});
+
+userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(findOrCreate);
+
+const User = new mongoose.model("User", userSchema);
+
+passport.use(User.createStrategy());
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
 
 app.get("/", (req, res) => {
   
@@ -81,8 +116,33 @@ app.post("/", (req, res) => {
   });
 }); 
 
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+
+app.post("/login", (req, res) => {
+  const user = new User({
+      username: req.body.username,
+      password: req.body.password
+  });
+
+  req.login(user, (err) => {
+      if (err) {
+          console.log(err);
+      } else {
+          passport.authenticate("local")(req, res, () => {
+              res.redirect("/compose");
+          });
+      }
+  });
+});
+
 app.get("/compose", (req, res) => {
-  res.render("compose");
+  if (req.isAuthenticated()) {
+    res.render("compose");
+  } else {
+    res.redirect("/login");
+  }
 });
 
 app.get("/success", (req, res) => {
