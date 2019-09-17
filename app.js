@@ -109,8 +109,20 @@ app.post("/", (req, res) => {
   };
 
   request(options, (error, response, body) => {
-      if (error) {
-          res.render("failure");
+      const parsedBody = (JSON.parse(body));
+      console.log(parsedBody.errors[0].error);
+
+      const userAlreadyExists = () => {
+        if (parsedBody.errors[0].error === `${email} is already a list member, do you want to update? please provide update_existing:true in the request body`) {
+          return 'Already exists in the newsletter database.';
+        } 
+        return;
+      }
+
+      if (error || parsedBody.error_count !== 0) {
+          res.render("failure", {
+            userAlreadyExists: userAlreadyExists
+          });
       } else {
           if (response.statusCode === 200) {
             res.render("success");
