@@ -75,6 +75,10 @@ a:hover {
     transform: translateY(-3px);
   }
 
+  #logout {
+    margin-top: 20px;
+  }
+
   label {
       padding: 10px 0px 3px 0px;
       margin-bottom: 0px;

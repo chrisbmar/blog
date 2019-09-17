@@ -165,6 +165,11 @@ app.post("/login", (req, res) => {
   });
 });
 
+app.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
+});
+
 app.get("/compose", (req, res) => {
   if (req.isAuthenticated()) {
     res.render("compose");
