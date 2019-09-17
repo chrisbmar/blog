@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress:open": "cypress open"
   },
   "author": "",
   "license": "ISC",
@@ -21,5 +22,8 @@
     "passport-local-mongoose": "^5.0.1",
     "request": "^2.88.0",
     "showdown": "^1.9.0"
+  },
+  "devDependencies": {
+    "cypress": "^3.4.1"
   }
 }
