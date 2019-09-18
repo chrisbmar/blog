@@ -112,16 +112,22 @@ app.post("/", (req, res) => {
       const parsedBody = (JSON.parse(body));
       console.log(parsedBody.errors[0].error);
 
-      const userAlreadyExists = () => {
+      //check for errors with user email in post response from Mailchimp.
+      //If error exists, pass error message as a variable to failure page.
+      const userEmailError = () => {
         if (parsedBody.errors[0].error === `${email} is already a list member, do you want to update? please provide update_existing:true in the request body`) {
-          return 'Already exists in the newsletter database.';
-        } 
+          return `${email} Already exists in the newsletter database.`;
+        } else if (parsedBody.errors[0].error === 'Please provide a valid email address.') {
+          return 'Please provide a valid email address.';
+        } else if (parsedBody.errors[0].error === `${email} looks fake or invalid, please enter a real email address.`) {
+          return `${email} looks fake or invalid.`;
+        }
         return;
       }
 
       if (error || parsedBody.error_count !== 0) {
           res.render("failure", {
-            userAlreadyExists: userAlreadyExists
+            userEmailError: userEmailError()
           });
       } else {
           if (response.statusCode === 200) {
@@ -139,13 +145,17 @@ app.get("/register", (req, res) => {
 
 app.post("/register", (req, res) => {
 
-  if (req.body.code !== accessCode) {
-    res.render("failure");
+  if (req.body.code === 'test') {
+    res.render("success");
+  } else if (req.body.code !== accessCode) {
+    res.render("failure", {
+      userEmailError: 'Access code is not valid.'
+    });
   } else {
     User.register({username: req.body.username}, req.body.password, (err, user) => {
-      if (err) {
+      if (err && err.message !== 'A user with the given username is already registered') {
         console.log(err);
-        res.redirect("/register");
+        res.redirect("/register"); 
       } else {
         passport.authenticate("local")(req, res, () => {
           res.redirect("/compose");
@@ -161,20 +171,29 @@ app.get("/login", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-  const user = new User({
-      username: req.body.username,
-      password: req.body.password
-  });
 
-  req.login(user, (err) => {
-      if (err) {
-          console.log(err);
-      } else {
-          passport.authenticate("local")(req, res, () => {
+  User.findOne({username: req.body.username}, (err, result) => {
+    if(err || !result) {
+      res.redirect("/register");
+    } else {
+      
+      const user = new User({
+        username: req.body.username,
+        password: req.body.password
+      });
+
+      req.login(user, (err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            passport.authenticate("local")(req, res, () => { 
               res.redirect("/compose");
-          });
-      }
-  });
+            });
+        }
+      });  
+
+    }
+  })
 });
 
 app.get("/logout", (req, res) => {
