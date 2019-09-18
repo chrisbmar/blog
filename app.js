@@ -110,7 +110,6 @@ app.post("/", (req, res) => {
 
   request(options, (error, response, body) => {
       const parsedBody = (JSON.parse(body));
-      console.log(parsedBody.errors[0].error);
 
       //check for errors with user email in post response from Mailchimp.
       //If error exists, pass error message as a variable to failure page.
@@ -154,7 +153,7 @@ app.post("/register", (req, res) => {
   } else {
     User.register({username: req.body.username}, req.body.password, (err, user) => {
       if (err && err.message !== 'A user with the given username is already registered') {
-        console.log(err);
+        // console.log(err);
         res.redirect("/register"); 
       } else {
         passport.authenticate("local")(req, res, () => {
@@ -257,6 +256,11 @@ app.get("/contact", (req, res) => {
   res.render("contact");
 });
 
-app.listen(4000, function() {
-  console.log("Server started on port 4000");
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
+
+app.listen(port, () => {
+  console.log("Server has started successfully.");
 });
