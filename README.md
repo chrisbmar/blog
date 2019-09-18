@@ -12,6 +12,8 @@
 
 * Authentication for the “/compose” endpoint is handled by Passport.js along with cookies and sessions on the Backend.
 
+![](public/images/compose.png)
+
 * An API was created from scratch to interact with MailChimp's servers by using the NPM (request module). 
 
 * End-to-end testing was handled by Cypress.
