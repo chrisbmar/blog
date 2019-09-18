@@ -7,12 +7,12 @@
                     <img class="headshot" src="/images/Screenshot 2019-09-06 at 14.11.37.png" alt="image of author" height="40" width="40">
                 </div>
                 <div class="postinfo-container">
-                    <a href="/about" class="author-read-more"><span><%= post.author %> </span></a>
+                    <a href="/about" id="authorInfo" class="author-read-more"><span><%= post.author %> </span></a>
                     <p> <%= post.date %> | <span><%= post.time %> min read</span></p>
                 </div>
         </div>
         <h1 class="title"><%= post.title %> </h1>
-        <p><a href="posts/<%= post._id%>" class="author-read-more">Read More</a></p>
+        <p><a href="posts/<%= post._id%>" id="readMore" class="author-read-more">Read More</a></p>
     </div>
 <% }); %>
 
