@@ -32,7 +32,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://localhost:27017/blogDB", {useNewUrlParser: true});
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0-synjx.mongodb.net/blogDB`, {useNewUrlParser: true});
 mongoose.set("useCreateIndex", true);
 
 //blog post schema

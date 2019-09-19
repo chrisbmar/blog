@@ -1,7 +1,7 @@
 describe('Home page loads correctly', () => {
 
     it('Visits the blog homepage', () => {
-      cy.visit('http://localhost:4000/');
+      cy.visit('http://localhost:3000/');
     });
 
     it('contains "BLOG - Chris Martin" in the title', () => {
@@ -18,7 +18,7 @@ describe('Home page loads correctly', () => {
 describe('Nav bar list items loads correct pages', () => {
 
     beforeEach(() => {
-        cy.visit('http://localhost:4000/');
+        cy.visit('http://localhost:3000/');
     });
 
     it('Daily blog title on click returns to the homepage', () => {
@@ -50,7 +50,7 @@ describe('Nav bar list items loads correct pages', () => {
 describe('blog posts are loaded correctly', () => {
 
     beforeEach(() => {
-        cy.visit('http://localhost:4000/');
+        cy.visit('http://localhost:3000/');
     });
 
     it('blog posts are rendered on home page', () => {
@@ -86,7 +86,7 @@ describe('blog posts are loaded correctly', () => {
 describe('Newsletter signup success', () => {
 
     it('Signs up valid email to newsletter', () => {
-        cy.visit('http://localhost:4000/');
+        cy.visit('http://localhost:3000/');
 
         cy.get('input[name=fName]').type("chris");
         cy.get('input[name=lName]').type("martin");
@@ -97,7 +97,7 @@ describe('Newsletter signup success', () => {
     });
 
     it('Does not sign up an invalid email to newsletter', () => {
-        cy.visit('http://localhost:4000/');
+        cy.visit('http://localhost:3000/');
 
         cy.get('input[name=fName]').type("chris");
         cy.get('input[name=lName]').type("martin");
@@ -112,7 +112,7 @@ describe('Newsletter signup success', () => {
 describe('Authentication works correctly', () => {
 
     it('Does not register user without access code', () => {
-        cy.visit('http://localhost:4000/register');
+        cy.visit('http://localhost:3000/register');
 
         cy.get('input[name=username]').type("chris@1.com");
         cy.get('input[name=password]').type("123");
@@ -122,7 +122,7 @@ describe('Authentication works correctly', () => {
     });
 
     it('Registers a user with correct access code', () => {
-        cy.visit('http://localhost:4000/register');
+        cy.visit('http://localhost:3000/register');
 
         cy.get('input[name=code]').type('test');
         cy.get('input[name=username]').type("chris@1.com");
@@ -133,7 +133,7 @@ describe('Authentication works correctly', () => {
     });
 
     it('Logs in an authenticated user', () => {
-        cy.visit('http://localhost:4000/login');
+        cy.visit('http://localhost:3000/login');
         cy.get('input[name=username]').type("test@fakeemail.com");
         cy.get('input[name=password]').type("123");
         cy.get('button').click();
@@ -142,7 +142,7 @@ describe('Authentication works correctly', () => {
     });
 
     it('Does not log in an unauthenticated user', () => {
-        cy.visit('http://localhost:4000/login');
+        cy.visit('http://localhost:3000/login');
         cy.get('input[name=username]').type("fakeemail@123.com");
         cy.get('input[name=password]').type("123");
         cy.get('button').click();
@@ -155,7 +155,7 @@ describe('Authentication works correctly', () => {
 describe('Loads correctly for mobile', () => {
     
     beforeEach(() => {
-        cy.visit('http://localhost:4000/');
+        cy.visit('http://localhost:3000/');
         cy.viewport('iphone-6');
     });
 
