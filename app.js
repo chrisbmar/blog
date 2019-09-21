@@ -173,7 +173,9 @@ app.post("/login", (req, res) => {
 
   User.findOne({username: req.body.username}, (err, result) => {
     if(err || !result) {
-      res.redirect("/register");
+      res.render("failure", {
+        userEmailError: "Email or password is incorrect."
+      });
     } else if (req.body.username === "test@fakeemail.com") {
       res.render("success");
     } else {
@@ -206,7 +208,9 @@ app.get("/compose", (req, res) => {
   if (req.isAuthenticated()) {
     res.render("compose");
   } else {
-    res.redirect("/login");
+    res.render("failure", {
+      userEmailError: "Please ensure you are logged in to access this page."
+    });
   }
 });
 

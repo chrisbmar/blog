@@ -5,10 +5,23 @@
         <h1 class="display-4">Uh oh!</h1>
         <p class="lead">There was an error. <%= userEmailError %> Please try again.</p>
 
-        <form action="/" method="GET">
-            <button type="submit" class="publish-button">Return</button>
-        </form>
+        <div id="form-buttons">
+            <form action="/" method="GET">
+                <button type="submit" id="button" class="publish-button">HOME</button>
+            </form>
+
+            <form action="/login" method="GET">
+                <button type="submit" id="button" class="publish-button">LOG IN</button>
+            </form>
+
+            <form action="/register" method="GET">
+                <button type="submit" id="button" class="publish-button">REGISTER</button>
+            </form>
+        </div>   
+
+
     </div>
 </div>
+
 
 <%- include('partials/footer') %>

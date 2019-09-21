@@ -147,7 +147,7 @@ describe('Authentication works correctly', () => {
         cy.get('input[name=password]').type("123");
         cy.get('button').click();
 
-        cy.url().should('contain', '/register');
+        cy.get('.lead').should('have.text', 'There was an error. Email or password is incorrect. Please try again.');
     });
 
 });
