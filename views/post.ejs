@@ -1,6 +1,15 @@
 <%- include('partials/header') %>
 
 <div class="blog-post">
+    <div class="author-info">
+        <div class="image-container">
+            <img class="headshot" src="/images/Screenshot 2019-09-06 at 14.11.37.png" alt="image of author" height="40" width="40">
+        </div>
+        <div class="postinfo-container">
+            <a href="/about" id="authorInfo" class="author-read-more"><span><%= author %> </span></a>
+            <p> <%= date %> | <span><%= time %> min read</span></p>
+        </div>
+    </div>
     <h1><%= title %> </h1>
     <%- content %>
 </div>

@@ -243,6 +243,9 @@ app.get("/posts/:postId", (req, res) => {
     if (!err) {
       res.render("post", {
         title: post.title,
+        date: post.date,
+        time: post.time,
+        author: post.author,
         content: post.content
       });
     } else {

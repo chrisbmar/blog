@@ -43,6 +43,7 @@ jspm_packages/
 
 # Testing
 cypress/
+cypress.json
 
 # TypeScript v1 declaration files
 typings/
