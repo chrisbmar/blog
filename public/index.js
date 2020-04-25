@@ -1,7 +1,5 @@
 $(document).ready(() => {
-
-    $("#bars").click(() => {
-        $("#nav-options").toggle();
-    });
-
+  $("#bars").click(() => {
+    $("#nav-options").toggle();
+  });
 });
